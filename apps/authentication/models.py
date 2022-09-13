@@ -18,6 +18,10 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(64), unique=True)
     password = db.Column(db.LargeBinary)
 
+    # double check syntax on these
+    # premoney_val = db.Column(db.Integer)
+    # round_size = db.Column(db.Integer)
+
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
             # depending on whether value is an iterable or not, we must

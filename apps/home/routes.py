@@ -8,12 +8,137 @@ from flask import render_template, request
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 
+class Calculator:
+    def __init__(self, name, tam, sam, som, seed_round_amount, pre_money_val, dilution_estimate):  
 
-@blueprint.route('/index')
+#       listing basic variables here
+        self.name = name
+        self.Seed_roundamt = seed_round_amount
+        self.Seed_premoney = pre_money_val
+        self.Seed_postmoney = self.Seed_premoney + self.Seed_roundamt
+        self.Seed_EquitySoldInRound = self.Seed_roundamt / self.Seed_postmoney
+        self.Seedfirmcheck = 50000 
+
+        self.tam = tam
+        self.sam = sam
+        self.som = som
+
+        self.dilution_hard_code =  dilution_estimate
+
+#       listing assumed values here
+#       for round amounts, I am using an average multiple to represent valuation jumps
+        self.A_roundamt = self.Seed_roundamt * 4
+        self.B_roundamt = self.A_roundamt * 1.875
+        self.C_roundamt = self.B_roundamt * 2   
+
+#       Consult with Jeff on this item, our discount may be much higher, and I will also need to factor in a scenario for it then
+        self.Seed_option = 0.07
+        self.A_option = 0.07     
+
+#       for round amounts, I am using an average multiple to represent valuation jumps        
+        self.A_premoney = self.Seed_premoney * 4
+        self.B_premoney = self.A_premoney * 2.65625
+        self.C_premoney = self.B_premoney * 2.35294  
+
+#       direct derivative of user input: seed premoney valuation 
+        self.A_postmoney = self.A_premoney + self.A_roundamt
+        self.B_postmoney = self.B_premoney + self.B_roundamt
+        self.C_postmoney = self.C_premoney + self.C_roundamt
+
+# can have a default calculation for dilution if they plug in an assumption
+# make sure that is can both filter and also educate
+
+# USE CASE: don't propose a stupid valuation
+# this is a hand holding exercise through dilution obstacles, it is a sanity check essentially
+
+#       listing equity calculations here
+#       direct derivative of user input: seed premoney valuation 
+        self.A_EquitySoldInRound = self.A_roundamt / self.A_postmoney
+        self.B_EquitySoldInRound = self.B_roundamt / self.B_postmoney
+        self.C_EquitySoldInRound = self.C_roundamt / self.C_postmoney
+
+        self.Seedfirmequity = self.Seedfirmcheck / self.Seed_postmoney 
+        
+
+# THIS IS THE MOST IMPORTANT FOR THE OUTPUT DISPLAY
+        self.required_exit_for_40xMOIC = ((self.Seed_premoney * 40) + self.Seedfirmcheck)/ (1-self.dilution_hard_code) - 100000
+        self.required_exit_for_20xMOIC = ((self.Seed_premoney * 20) + self.Seedfirmcheck)/ (1-self.dilution_hard_code) - 100000
+        self.required_exit_for_10xMOIC = ((self.Seed_premoney * 10) + self.Seedfirmcheck)/ (1-self.dilution_hard_code) - 100000
+        self.required_exit_for_5xMOIC = ((self.Seed_premoney * 5) + self.Seedfirmcheck)/ (1-self.dilution_hard_code) - 100000
+
+
+
+@blueprint.route('/index', methods = ["POST", "GET"])
 @login_required
 def index():
 
-    return render_template('home/index.html', segment='index')
+    # user_pre_mon_val = TestCompany.Seed_premoney
+    # user_post_mon_val = TestCompany.Seed_postmoney
+    # output40x = TestCompany.required_exit_for_40xMOIC
+    # output20x = TestCompany.required_exit_for_20xMOIC
+    # output10x = TestCompany.required_exit_for_10xMOIC
+    # output5x = TestCompany.required_exit_for_5xMOIC
+
+    # low_alt_output40x = ControlCompanyLow.required_exit_for_40xMOIC
+    # low_alt_output20x = ControlCompanyLow.required_exit_for_20xMOIC
+    # low_alt_output10x = ControlCompanyLow.required_exit_for_10xMOIC
+    # low_alt_output5x = ControlCompanyLow.required_exit_for_5xMOIC
+ 
+    # high_alt_output40x = ControlCompanyHigh.required_exit_for_40xMOIC
+    # high_alt_output20x = ControlCompanyHigh.required_exit_for_20xMOIC
+    # high_alt_output10x = ControlCompanyHigh.required_exit_for_10xMOIC
+    # high_alt_output5x = ControlCompanyHigh.required_exit_for_5xMOIC
+    
+    return render_template('home/index.html', segment='index')    
+
+@blueprint.route('/results', methods = ["POST", "GET"])
+@login_required
+def results():
+
+    given_dilution_estimate = request.form.get("user_dilution_estimate")
+
+    TestCompany = Calculator(request.form.get("company name"), float(request.form.get("tam")), float(request.form.get("sam")), float(request.form.get("som")), float(request.form.get("round_size")), float(request.form.get("premoney")), float((int(request.form.get("user_dilution_estimate"))/100)))
+
+    ControlCompanyLow = Calculator('Control Low', 1000000000, 500000000, 50000000, 2000000, 3000000, 0.5)
+
+    ControlCompanyHigh = Calculator('Control High', 1000000000, 500000000, 50000000, 2000000, 10000000, 0.5)
+
+    user_pre_mon_val = TestCompany.Seed_premoney
+    user_post_money_val = TestCompany.Seed_postmoney
+    output40x = TestCompany.required_exit_for_40xMOIC
+    output20x = TestCompany.required_exit_for_20xMOIC
+    output10x = TestCompany.required_exit_for_10xMOIC
+    output5x = TestCompany.required_exit_for_5xMOIC
+
+    tam_text = TestCompany.tam
+    sam_text = TestCompany.sam
+    som_text = TestCompany.som
+
+    sam_pct40x = ((TestCompany.required_exit_for_40xMOIC / TestCompany.sam) * 100)
+
+    tam_pct_sam = ((TestCompany.sam / TestCompany.tam) * 100)
+
+    low_tam_text = ControlCompanyLow.tam
+    low_sam_text = ControlCompanyLow.sam
+    low_som_text = ControlCompanyLow.som
+
+    high_tam_text = ControlCompanyHigh.tam
+    high_sam_text = ControlCompanyHigh.sam
+    high_som_text = ControlCompanyHigh.som
+
+    pct_40x_post = (TestCompany.Seed_postmoney / TestCompany.som) * 100
+
+    low_alt_output40x = ControlCompanyLow.required_exit_for_40xMOIC
+    low_alt_output20x = ControlCompanyLow.required_exit_for_20xMOIC
+    low_alt_output10x = ControlCompanyLow.required_exit_for_10xMOIC
+    low_alt_output5x = ControlCompanyLow.required_exit_for_5xMOIC
+ 
+    high_alt_output40x = ControlCompanyHigh.required_exit_for_40xMOIC
+    high_alt_output20x = ControlCompanyHigh.required_exit_for_20xMOIC
+    high_alt_output10x = ControlCompanyHigh.required_exit_for_10xMOIC
+    high_alt_output5x = ControlCompanyHigh.required_exit_for_5xMOIC
+
+    return render_template('home/index.html', segment='index', calculation_text40x='{:,.0f}'.format(output40x), calculation_text20x='{:,.0f}'.format(output20x), calculation_text10x='{:,.0f}'.format(output10x), calculation_text5x='{:,.0f}'.format(output5x), user_post_mon_val='{:,.0f}'.format(user_post_money_val), low_output_text40x='{:,.0f}'.format(low_alt_output40x), low_output_text20x='{:,.0f}'.format(low_alt_output20x), low_output_text10x='{:,.0f}'.format(low_alt_output10x), low_output_text5x='{:,.0f}'.format(low_alt_output5x), sam_pct40x_text = '{:,.0f}'.format(sam_pct40x), high_output_text40x='{:,.0f}'.format( high_alt_output40x), high_output_text20x='{:,.0f}'.format( high_alt_output20x),  high_output_text10x='{:,.0f}'.format( high_alt_output10x),  high_output_text5x='{:,.0f}'.format(high_alt_output5x), sam_text='{:,.0f}'.format(sam_text), tam_pct_sam_text='{:,.0f}'.format(tam_pct_sam), pct_40x_post_text='{:,.0f}'.format(pct_40x_post))
 
 
 @blueprint.route('/<template>')

@@ -7,6 +7,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
+# from flask_ngrok import run_with_ngrok
 
 
 db = SQLAlchemy()
@@ -37,6 +38,8 @@ def configure_database(app):
 
 def create_app(config):
     app = Flask(__name__)
+    # running with ngrok here
+    # run_with_ngrok(app)
     app.config.from_object(config)
     register_extensions(app)
     register_blueprints(app)
