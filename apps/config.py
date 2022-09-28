@@ -47,7 +47,7 @@ class ProductionConfig(Config):
 # postgres://hruvndtctrrpyk:6ecaaf643d58173ec973e3002c28d138a0c7b7fa2747169599a05d785492cd3a@ec2-34-199-68-114.compute-1.amazonaws.com:5432/da8a58r96bip0j
     3
 class DebugConfig(Config):
-    DEBUG = True
+    DEBUG = False
 
 
 # Load all possible configurations
