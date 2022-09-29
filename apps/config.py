@@ -16,8 +16,10 @@ class Config(object):
     # This will create a file in <app> FOLDER
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql://vaxlquiurzpxoy:32aba92d92139e94020a5bbfe0710ef44b225c9534f059772f8aa2bd1dc5f5e4@ec2-44-207-133-100.compute-1.amazonaws.com:5432/df1c3ejse989jg'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql://vaxlquiurzpxoy:32aba92d92139e94020a5bbfe0710ef44b225c9534f059772f8aa2bd1dc5f5e4@ec2-44-207-133-100.compute-1.amazonaws.com:5432/df1c3ejse989jg'
 
+    # current URL listed on heroku
+    SQLALCHEMY_DATABASE_URI = "postgresql://pyrmhgxikryjsb:9b29330cc961e99da32949916ce8d41da68545beb01bd940ccea7e2e4af475c5@ec2-44-209-24-62.compute-1.amazonaws.com:5432/d7ilia4mf6kmq"
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
