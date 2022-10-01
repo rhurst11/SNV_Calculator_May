@@ -45,3 +45,30 @@ class CreateAccountForm(FlaskForm):
                              id='som_create',
                              validators=[DataRequired()])
     submit = SubmitField('Sign Up')
+
+
+
+
+    # input form
+class CalculationForm(FlaskForm):
+    companyname = StringField('name',
+                         id='username_create',
+                         validators=[DataRequired()])
+    tam = IntegerField('Total Addressable Market',
+                             id='tam_create',
+                             validators=[DataRequired()])
+    sam = IntegerField('Serviceable Addressable Market',
+                             id='sam_create',
+                             validators=[DataRequired()])
+    som = IntegerField('Serviceable Obtainable Market',
+                             id='som_create',
+                             validators=[DataRequired()])
+    round_size = IntegerField('round size',
+                             id='roundsize_create',
+                             validators=[DataRequired()])
+    premoney_value = IntegerField('round size',
+                             id='premoney_create',
+                             validators=[DataRequired()])
+    dilution_estimate = IntegerField('round size',
+                             id='premoney_create',
+                             validators=[DataRequired()])

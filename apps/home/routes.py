@@ -8,8 +8,10 @@ from flask import render_template, request
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 
+from apps.authentication.forms import CalculationForm
+
 class Calculator:
-    def __init__(self, name, tam, sam, som, seed_round_amount, pre_money_val, dilution_estimate):  
+    def __init__(self, name, tam, sam, som, seed_round_amount, pre_money_val, sales_multiple, dilution_estimate):  
 
 #       listing basic variables here
         self.name = name
@@ -22,6 +24,8 @@ class Calculator:
         self.tam = tam
         self.sam = sam
         self.som = som
+
+        self.sales_multiple = sales_multiple
 
         self.dilution_hard_code =  dilution_estimate
 
@@ -45,6 +49,8 @@ class Calculator:
         self.B_postmoney = self.B_premoney + self.B_roundamt
         self.C_postmoney = self.C_premoney + self.C_roundamt
 
+
+
 # can have a default calculation for dilution if they plug in an assumption
 # make sure that is can both filter and also educate
 
@@ -66,7 +72,7 @@ class Calculator:
         self.required_exit_for_10xMOIC = ((self.Seed_premoney * 10) + self.Seedfirmcheck)/ (1-self.dilution_hard_code) - 100000
         self.required_exit_for_5xMOIC = ((self.Seed_premoney * 5) + self.Seedfirmcheck)/ (1-self.dilution_hard_code) - 100000
 
-
+        self.required_annual_sales = self.required_exit_for_40xMOIC / self.sales_multiple
 
 @blueprint.route('/index', methods = ["POST", "GET"])
 @login_required
@@ -95,24 +101,30 @@ def index():
 @login_required
 def results():
 
-    given_dilution_estimate = request.form.get("user_dilution_estimate")
+    form = CalculationForm(request.form)
 
-    TestCompany = Calculator(request.form.get("company name"), float(request.form.get("tam")), float(request.form.get("sam")), float(request.form.get("som")), float(request.form.get("round_size")), float(request.form.get("premoney")), float((int(request.form.get("user_dilution_estimate"))/100)))
+    given_dilution_estimate = int(request.form.get("user_dilution_estimate"))
 
-    ControlCompanyLow = Calculator('Control Low', 1000000000, 500000000, 50000000, 2000000, 3000000, 0.5)
+    TestCompany = Calculator(request.form.get("company name"), float(request.form.get("tam")), float(request.form.get("sam")), float(request.form.get("som")), float(request.form.get("round_size")), float(request.form.get("premoney")), float(request.form.get("sales_multiple")), float((int(request.form.get("user_dilution_estimate"))/100)))
 
-    ControlCompanyHigh = Calculator('Control High', 1000000000, 500000000, 50000000, 2000000, 10000000, 0.5)
+    ControlCompanyLow = Calculator('Control Low', 1000000000, 500000000, 50000000, 2000000, 3000000, 5, 0.5)
+
+    ControlCompanyHigh = Calculator('Control High', 1000000000, 500000000, 50000000, 2000000, 10000000, 5, 0.5)
 
     user_pre_mon_val = TestCompany.Seed_premoney
     user_post_money_val = TestCompany.Seed_postmoney
+    user_round_size = TestCompany.Seed_roundamt
     output40x = TestCompany.required_exit_for_40xMOIC
     output20x = TestCompany.required_exit_for_20xMOIC
     output10x = TestCompany.required_exit_for_10xMOIC
     output5x = TestCompany.required_exit_for_5xMOIC
+    sales_multiple = TestCompany.sales_multiple
 
     tam_text = TestCompany.tam
     sam_text = TestCompany.sam
     som_text = TestCompany.som
+
+    required_sales_annual_sales_text = TestCompany.required_annual_sales
 
     sam_pct40x = ((TestCompany.required_exit_for_40xMOIC / TestCompany.sam) * 100)
 
@@ -138,7 +150,7 @@ def results():
     high_alt_output10x = ControlCompanyHigh.required_exit_for_10xMOIC
     high_alt_output5x = ControlCompanyHigh.required_exit_for_5xMOIC
 
-    return render_template('home/index.html', segment='index', calculation_text40x='{:,.0f}'.format(output40x), calculation_text20x='{:,.0f}'.format(output20x), calculation_text10x='{:,.0f}'.format(output10x), calculation_text5x='{:,.0f}'.format(output5x), user_post_mon_val='{:,.0f}'.format(user_post_money_val), low_output_text40x='{:,.0f}'.format(low_alt_output40x), low_output_text20x='{:,.0f}'.format(low_alt_output20x), low_output_text10x='{:,.0f}'.format(low_alt_output10x), low_output_text5x='{:,.0f}'.format(low_alt_output5x), sam_pct40x_text = '{:,.0f}'.format(sam_pct40x), high_output_text40x='{:,.0f}'.format( high_alt_output40x), high_output_text20x='{:,.0f}'.format( high_alt_output20x),  high_output_text10x='{:,.0f}'.format( high_alt_output10x),  high_output_text5x='{:,.0f}'.format(high_alt_output5x), sam_text='{:,.0f}'.format(sam_text), tam_pct_sam_text='{:,.0f}'.format(tam_pct_sam), pct_40x_post_text='{:,.0f}'.format(pct_40x_post))
+    return render_template('home/index.html', segment='index', dilution_estimate=(f"previous input: {given_dilution_estimate}"), round_size=(f"previous input: {user_round_size}"), sales_multiple_text = (int(sales_multiple)), sales_multiple = (f"Previous Input: {sales_multiple}"), pre_mon_val=(f"previous input: {user_pre_mon_val}"), calculation_text40x='{:,.0f}'.format(output40x), calculation_text20x='{:,.0f}'.format(output20x), calculation_text10x='{:,.0f}'.format(output10x), calculation_text5x='{:,.0f}'.format(output5x), user_post_mon_val='{:,.0f}'.format(user_post_money_val), low_output_text40x='{:,.0f}'.format(low_alt_output40x), low_output_text20x='{:,.0f}'.format(low_alt_output20x), low_output_text10x='{:,.0f}'.format(low_alt_output10x), low_output_text5x='{:,.0f}'.format(low_alt_output5x), sam_pct40x_text = '{:,.0f}'.format(sam_pct40x), high_output_text40x='{:,.0f}'.format( high_alt_output40x), high_output_text20x='{:,.0f}'.format( high_alt_output20x),  high_output_text10x='{:,.0f}'.format( high_alt_output10x),  high_output_text5x='{:,.0f}'.format(high_alt_output5x), tam_text='{:,.0f}'.format(tam_text), sam_text='{:,.0f}'.format(sam_text), som_text='{:,.0f}'.format(som_text), tam_pct_sam_text='{:,.0f}'.format(tam_pct_sam), pct_40x_post_text='{:,.0f}'.format(pct_40x_post), required_sales_annual_sales = (f"Previous Input: {required_sales_annual_sales_text}"), required_sales_annual_sales_text1 = (int(required_sales_annual_sales_text)))
 
 
 @blueprint.route('/<template>')

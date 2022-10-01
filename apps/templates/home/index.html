@@ -25,51 +25,59 @@
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
                                     <label for="add">Company Name (string)</label>
-                                    <input type="username" class="form-control" id="add" name="company_name" aria-describedby="PremoneyHelp" placeholder="company name">
-                                    <small id="addd" class="form-text text-muted">This is your company's pre-money at time of current raise</small>
+                                    <input type="username" class="form-control" id="add" name="company_name" aria-describedby="PremoneyHelp" placeholder="Enter Company Name">
+                                    <small id="addd" class="form-text text-muted"></small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
                                     <label for="add">TAM (string)</label>
-                                    <input type="username" class="form-control" id="add" name="tam" aria-describedby="PremoneyHelp" placeholder="total addressable market">
-                                    <small id="addd" class="form-text text-muted">This is your company's pre-money at time of current raise</small>
+                                    <input type="username" class="form-control" id="add" name="tam" aria-describedby="PremoneyHelp" placeholder="Enter Total Addressable Market">
+                                    <small id="addd" class="form-text text-muted">{{tam_text}}</small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
                                     <label for="add">SAM (string)</label>
-                                    <input type="username" class="form-control" id="add" name="sam" aria-describedby="PremoneyHelp" placeholder="serviceable addressable market">
-                                    <small id="addd" class="form-text text-muted">This is your company's pre-money at time of current raise</small>
+                                    <input type="username" class="form-control" id="add" name="sam" aria-describedby="PremoneyHelp" placeholder="Serviceable Addressable Market">
+                                    <small id="addd" class="form-text text-muted">{{sam_text}}</small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
                                     <label for="add">SOM (string)</label>
-                                    <input type="username" class="form-control" id="add" name="som" aria-describedby="PremoneyHelp" placeholder="serviceable obtainable market">
-                                    <small id="addd" class="form-text text-muted">This is your company's pre-money at time of current raise</small>
+                                    <input type="username" class="form-control" id="add" name="som" aria-describedby="PremoneyHelp" placeholder="Enter Serviceable Obtainable Market">
+                                    <small id="addd" class="form-text text-muted">{{som_text}}</small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
                                     <label for="add">Round Size (integer)</label>
-                                    <input type="number" class="form-control" id="add" name="round_size" aria-describedby="TAMHelp" placeholder="enter round_size">
-                                    <small id="addd" class="form-text text-muted">It doesn't have to be huge, be realistic</small>
+                                    <input type="number" class="form-control" id="add" name="round_size" aria-describedby="TAMHelp" placeholder="Enter Round Size">
+                                    <small id="addd" class="form-text text-muted"> {{round_size}} </small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
                                     <label for="add">Premoney Valuation (integer)</label>
-                                    <input type="number" class="form-control" id="add" name="premoney" aria-describedby="SAMHelp" placeholder="Enter premoney">
-                                    <small id="addd" class="form-text text-muted">once again, be realistic</small>
+                                    <input type="number" class="form-control" id="add" name="premoney" aria-describedby="SAMHelp" placeholder="Enter Premoney">
+                                    <small id="addd" class="form-text text-muted"> {{pre_mon_val}} </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mb-4">
+                                <div class="form-group">
+                                    <label for="add">Sales Multiple (integer)</label>
+                                    <input type="number" class="form-control" id="add" name="sales_multiple" aria-describedby="SAMHelp" placeholder="Enter Sales Multiple">
+                                    <small id="addd" class="form-text text-muted"> {{sales_multiple}} </small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
                                     <label for="add">Dilution Estimate (ex 50 for 50%) (integer)</label>
-                                    <input type="number" class="form-control" id="add" name="user_dilution_estimate" min = "0" aria-describedby="SOMHelp" placeholder="user_dilution_estimate">
-                                    <small id="addd" class="form-text text-muted">... realistic </small>
-                                </div>
+                                    <input type="number" class="form-control" id="add" name="user_dilution_estimate" min = "0" aria-describedby="SOMHelp" placeholder="dilution estimate">
+                                    <small id="addd" class="form-text text-muted"> {{dilution_estimate}} </small>
+                                </div>                            
+                            
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <a href="/login.html"></a>
@@ -102,6 +110,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
                                 <!--[ daily sales section ] end-->
                                 <!--[ Monthly  sales section ] starts-->
                                 <div class="col-md-6 col-xl-4">
@@ -150,6 +161,74 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-12 col-xl-4">
+                                    <div class="card yearly-sales">
+                                        <div class="card-block">
+                                            <h6 class="mb-4">Sales Multiple Benchmark</h6>
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-9">
+                                                    <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
+                                                            class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>
+                                                            {{ sales_multiple_text }}</h3>
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <p class="m-b-0">{{ pct_40x_post_text }}% of SOM</p>
+                                                </div>
+                                            </div>
+                                            <div class="progress m-t-30" style="height: 7px;">
+                                                <div class="progress-bar progress-c-theme" role="progressbar"
+                                                        style="width: 70%;" aria-valuenow="70" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xl-4">
+                                    <div class="card yearly-sales">
+                                        <div class="card-block">
+                                            <h6 class="mb-4">Required Annual Sales</h6>
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-9">
+                                                    <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
+                                                            class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>$
+                                                            {{ required_sales_annual_sales_text1 }}</h3>
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <p class="m-b-0">{{ pct_40x_post_text }}% of SOM</p>
+                                                </div>
+                                            </div>
+                                            <div class="progress m-t-30" style="height: 7px;">
+                                                <div class="progress-bar progress-c-theme" role="progressbar"
+                                                        style="width: 70%;" aria-valuenow="70" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xl-4">
+                                    <div class="card yearly-sales">
+                                        <div class="card-block">
+                                            <h6 class="mb-4">Round Size</h6>
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-9">
+                                                    <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
+                                                            class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>$
+                                                            {{ user_post_mon_val }}</h3>
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <p class="m-b-0">{{ pct_40x_post_text }}% of SOM</p>
+                                                </div>
+                                            </div>
+                                            <div class="progress m-t-30" style="height: 7px;">
+                                                <div class="progress-bar progress-c-theme" role="progressbar"
+                                                        style="width: 70%;" aria-valuenow="70" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+
                                 <!--[ year  sales section ] end-->
                                 <!--[ Recent Users ] start-->
                                 <!-- <div class="col-xl-8 col-md-6"> -->
