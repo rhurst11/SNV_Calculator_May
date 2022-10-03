@@ -15,15 +15,15 @@ class Calculator:
 
 #       listing basic variables here
         self.name = name
-        self.Seed_roundamt = seed_round_amount
-        self.Seed_premoney = pre_money_val
+        self.Seed_roundamt = seed_round_amount * 1000000
+        self.Seed_premoney = pre_money_val * 1000000
         self.Seed_postmoney = self.Seed_premoney + self.Seed_roundamt
         self.Seed_EquitySoldInRound = self.Seed_roundamt / self.Seed_postmoney
         self.Seedfirmcheck = 50000 
 
-        self.tam = tam
-        self.sam = sam
-        self.som = som
+        self.tam = tam * 1000000000
+        self.sam = tam * 1000000
+        self.som = som * 1000000
 
         self.sales_multiple = sales_multiple
 
