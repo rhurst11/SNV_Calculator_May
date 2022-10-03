@@ -24,57 +24,57 @@
                         <form action="{{ url_for('home_blueprint.results')}}"method="post">
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
-                                    <label for="add">Company Name (string)</label>
+                                    <label for="add">Company Name</label>
                                     <input type="username" class="form-control" id="add" name="company_name" aria-describedby="PremoneyHelp" placeholder="Enter Company Name">
                                     <small id="addd" class="form-text text-muted"></small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
-                                    <label for="add">TAM (string)</label>
+                                    <label for="add">TAM (ex. input 5 for $5 billion)</label>
                                     <input type="username" class="form-control" id="add" name="tam" aria-describedby="PremoneyHelp" placeholder="Enter Total Addressable Market">
                                     <small id="addd" class="form-text text-muted">{{tam_text}}</small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
-                                    <label for="add">SAM (string)</label>
+                                    <label for="add">SAM (ex. input 500 for $500 million)</label>
                                     <input type="username" class="form-control" id="add" name="sam" aria-describedby="PremoneyHelp" placeholder="Serviceable Addressable Market">
                                     <small id="addd" class="form-text text-muted">{{sam_text}}</small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
-                                    <label for="add">SOM (string)</label>
+                                    <label for="add">SOM (ex. input 50 for $50 million)</label>
                                     <input type="username" class="form-control" id="add" name="som" aria-describedby="PremoneyHelp" placeholder="Enter Serviceable Obtainable Market">
                                     <small id="addd" class="form-text text-muted">{{som_text}}</small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
-                                    <label for="add">Round Size (integer)</label>
+                                    <label for="add">Round Size (ex. input 2 for a $2 million round)</label>
                                     <input type="number" class="form-control" id="add" name="round_size" aria-describedby="TAMHelp" placeholder="Enter Round Size">
                                     <small id="addd" class="form-text text-muted"> {{round_size}} </small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
-                                    <label for="add">Premoney Valuation (integer)</label>
+                                    <label for="add">Premoney Valuation (ex. input 5 for a $5 million premoney)</label>
                                     <input type="number" class="form-control" id="add" name="premoney" aria-describedby="SAMHelp" placeholder="Enter Premoney">
                                     <small id="addd" class="form-text text-muted"> {{pre_mon_val}} </small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
-                                    <label for="add">Sales Multiple (integer)</label>
+                                    <label for="add">Sales Multiple</label>
                                     <input type="number" class="form-control" id="add" name="sales_multiple" aria-describedby="SAMHelp" placeholder="Enter Sales Multiple">
                                     <small id="addd" class="form-text text-muted"> {{sales_multiple}} </small>
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="form-group">
-                                    <label for="add">Dilution Estimate (ex 50 for 50%) (integer)</label>
-                                    <input type="number" class="form-control" id="add" name="user_dilution_estimate" min = "0" aria-describedby="SOMHelp" placeholder="dilution estimate">
+                                    <label for="add">Dilution Estimate (ex. input 50 for 50%)</label>
+                                    <input type="number" class="form-control" id="add" name="user_dilution_estimate" min = "0" aria-describedby="SOMHelp" placeholder="Dilution Estimate">
                                     <small id="addd" class="form-text text-muted"> {{dilution_estimate}} </small>
                                 </div>                            
                             
@@ -173,7 +173,7 @@
                                                             {{ sales_multiple_text }}</h3>
                                                 </div>
                                                 <div class="col-3 text-right">
-                                                    <p class="m-b-0">{{ pct_40x_post_text }}% of SOM</p>
+                                                    <p class="m-b-0"></p>
                                                 </div>
                                             </div>
                                             <div class="progress m-t-30" style="height: 7px;">
@@ -195,7 +195,7 @@
                                                             {{ required_sales_annual_sales_text1 }}</h3>
                                                 </div>
                                                 <div class="col-3 text-right">
-                                                    <p class="m-b-0">{{ pct_40x_post_text }}% of SOM</p>
+                                                    <p class="m-b-0">{{ sam_pct40x_text }}% of SAM</p>
                                                 </div>
                                             </div>
                                             <div class="progress m-t-30" style="height: 7px;">
