@@ -22,7 +22,7 @@ class Calculator:
         self.Seedfirmcheck = 50000 
 
         self.tam = tam * 1000000000
-        self.sam = tam * 1000000
+        self.sam = sam * 1000000
         self.som = som * 1000000
 
         self.sales_multiple = sales_multiple
@@ -150,7 +150,7 @@ def results():
     high_alt_output10x = ControlCompanyHigh.required_exit_for_10xMOIC
     high_alt_output5x = ControlCompanyHigh.required_exit_for_5xMOIC
 
-    return render_template('home/index.html', segment='index', dilution_estimate=(f"previous input: {given_dilution_estimate}"), round_size=(f"previous input: {user_round_size}"), sales_multiple_text = (int(sales_multiple)), sales_multiple = (f"Previous Input: {sales_multiple}"), pre_mon_val=(f"previous input: {user_pre_mon_val}"), calculation_text40x='{:,.0f}'.format(output40x), calculation_text20x='{:,.0f}'.format(output20x), calculation_text10x='{:,.0f}'.format(output10x), calculation_text5x='{:,.0f}'.format(output5x), user_post_mon_val='{:,.0f}'.format(user_post_money_val), low_output_text40x='{:,.0f}'.format(low_alt_output40x), low_output_text20x='{:,.0f}'.format(low_alt_output20x), low_output_text10x='{:,.0f}'.format(low_alt_output10x), low_output_text5x='{:,.0f}'.format(low_alt_output5x), sam_pct40x_text = '{:,.0f}'.format(sam_pct40x), high_output_text40x='{:,.0f}'.format( high_alt_output40x), high_output_text20x='{:,.0f}'.format( high_alt_output20x),  high_output_text10x='{:,.0f}'.format( high_alt_output10x),  high_output_text5x='{:,.0f}'.format(high_alt_output5x), tam_text='{:,.0f}'.format(tam_text), sam_text='{:,.0f}'.format(sam_text), som_text='{:,.0f}'.format(som_text), tam_pct_sam_text='{:,.0f}'.format(tam_pct_sam), pct_40x_post_text='{:,.0f}'.format(pct_40x_post), required_sales_annual_sales = (f"Previous Input: {required_sales_annual_sales_text}"), required_sales_annual_sales_text1 = (int(required_sales_annual_sales_text)))
+    return render_template('home/index.html', segment='index', dilution_estimate=(f"previous input: {given_dilution_estimate}"), round_size=(f"previous input: {user_round_size}"), sales_multiple_text = (int(sales_multiple)), sales_multiple = (f"Previous Input: {sales_multiple}"), pre_mon_val=(f"previous input: {user_pre_mon_val}"), calculation_text40x='{:,.0f}'.format(output40x), calculation_text20x='{:,.0f}'.format(output20x), calculation_text10x='{:,.0f}'.format(output10x), calculation_text5x='{:,.0f}'.format(output5x), user_post_mon_val='{:,.0f}'.format(user_post_money_val), low_output_text40x='{:,.0f}'.format(low_alt_output40x), low_output_text20x='{:,.0f}'.format(low_alt_output20x), low_output_text10x='{:,.0f}'.format(low_alt_output10x), low_output_text5x='{:,.0f}'.format(low_alt_output5x), sam_pct40x_text = '{:,.0f}'.format(sam_pct40x), high_output_text40x='{:,.0f}'.format( high_alt_output40x), high_output_text20x='{:,.0f}'.format( high_alt_output20x),  high_output_text10x='{:,.0f}'.format( high_alt_output10x),  high_output_text5x='{:,.0f}'.format(high_alt_output5x), tam_text='{:,.0f}'.format(tam_text), sam_text='{:,.0f}'.format(sam_text), som_text='{:,.0f}'.format(som_text), tam_pct_sam_text='{:,.0f}'.format(tam_pct_sam), pct_40x_post_text='{:,.0f}'.format(pct_40x_post), required_sales_annual_sales = (f"Previous Input: {required_sales_annual_sales_text}"), required_sales_annual_sales_text1 = '{:,.0f}'.format((int(required_sales_annual_sales_text))))
 
 
 @blueprint.route('/<template>')
