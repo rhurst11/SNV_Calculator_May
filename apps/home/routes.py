@@ -17,7 +17,8 @@ class Calculator:
         self.name = name
         self.Seed_roundamt = seed_round_amount * 1000000
         self.Seed_premoney = pre_money_val * 1000000
-        self.Seed_postmoney = self.Seed_premoney + self.Seed_roundamt
+        # removing this for now so post money works, but go back and clean this up
+        self.Seed_postmoney = self.Seed_premoney
         self.Seed_EquitySoldInRound = self.Seed_roundamt / self.Seed_postmoney
         self.Seedfirmcheck = 50000 
 
