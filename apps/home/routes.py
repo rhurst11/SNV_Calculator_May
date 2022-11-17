@@ -27,7 +27,7 @@ class Calculator:
 
         self.sales_multiple = sales_multiple
 
-        self.dilution_hard_code =  dilution_estimate
+        self.dilution_hard_code =  dilution_estimate + 0.025
 
 #       listing assumed values here
 #       for round amounts, I am using an average multiple to represent valuation jumps
