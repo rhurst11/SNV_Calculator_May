@@ -21,7 +21,8 @@ class Config(object):
     # current URL listed on heroku
 
     # URL keeps randomly changing on heroku and I need to understand why. Breaks the app without me having done anything
-    SQLALCHEMY_DATABASE_URI = "postgresql://huvbhkicefylkt:69ae5d5dec2011f7bef3bece224de3e3300c3641b779714091f5980a2e7dd9ee@ec2-3-219-135-162.compute-1.amazonaws.com:5432/d31sdr1nq0s09s"
+    SQLALCHEMY_DATABASE_URI = "postgresql://mrihnzxvwbhdyx:6307ba4ebdff413fc7fb37e4e6f78ab14d74698482b039f2841349f3f04c0a8f@ec2-3-217-251-77.compute-1.amazonaws.com:5432/dblpgevgpm3qbr"
+
 
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
