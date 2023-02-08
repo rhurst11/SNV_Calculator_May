@@ -14,16 +14,13 @@ class Config(object):
     SECRET_KEY = os.getenv('SECRET_KEY', 'S#perS3crEt_007')
 
     # This will create a file in <app> FOLDER
-    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
-
-    # SQLALCHEMY_DATABASE_URI = 'postgresql://vaxlquiurzpxoy:32aba92d92139e94020a5bbfe0710ef44b225c9534f059772f8aa2bd1dc5f5e4@ec2-44-207-133-100.compute-1.amazonaws.com:5432/df1c3ejse989jg'
 
     # current URL listed on heroku
-
     # URL keeps randomly changing on heroku and I need to understand why. Breaks the app without me having done anything
-    SQLALCHEMY_DATABASE_URI = "postgresql://mrihnzxvwbhdyx:6307ba4ebdff413fc7fb37e4e6f78ab14d74698482b039f2841349f3f04c0a8f@ec2-3-217-251-77.compute-1.amazonaws.com:5432/dblpgevgpm3qbr"
+    SQLALCHEMY_DATABASE_URI = "postgresql://szrmaofkhnksgx:8b0e2f6aff9b34910acecf8fb1cba746248ecad08864c2c5532281123b6d7750@ec2-3-224-184-9.compute-1.amazonaws.com:5432/dbc6gemsa6f1ro"
 
-
+# postgres URI from 2/8
+#  postgresql://szrmaofkhnksgx:8b0e2f6aff9b34910acecf8fb1cba746248ecad08864c2c5532281123b6d7750@ec2-3-224-184-9.compute-1.amazonaws.com:5432/dbc6gemsa6f1ro
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
