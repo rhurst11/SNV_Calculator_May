@@ -17,10 +17,13 @@ class Config(object):
 
     # current URL listed on heroku
     # URL keeps randomly changing on heroku and I need to understand why. Breaks the app without me having done anything
-    SQLALCHEMY_DATABASE_URI = "postgresql://szrmaofkhnksgx:8b0e2f6aff9b34910acecf8fb1cba746248ecad08864c2c5532281123b6d7750@ec2-3-224-184-9.compute-1.amazonaws.com:5432/dbc6gemsa6f1ro"
+    # SQLALCHEMY_DATABASE_URI = "postgresql://szrmaofkhnksgx:8b0e2f6aff9b34910acecf8fb1cba746248ecad08864c2c5532281123b6d7750@ec2-3-224-184-9.compute-1.amazonaws.com:5432/dbc6gemsa6f1ro"
 
 # postgres URI from 2/8
 #  postgresql://szrmaofkhnksgx:8b0e2f6aff9b34910acecf8fb1cba746248ecad08864c2c5532281123b6d7750@ec2-3-224-184-9.compute-1.amazonaws.com:5432/dbc6gemsa6f1ro
+
+# postgres URI from 5/11
+    SQLALCHEMY_DATABASE_URI = "postgresql://mnofoadpvfvfpe:4a466f57c35a05cd3d351b9ddaa9df1402c49e6003cedb077fac6179097c110b@ec2-44-214-9-130.compute-1.amazonaws.com:5432/de0t5pginhg5bs"
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -48,7 +51,7 @@ class ProductionConfig(Config):
 
 # heroku postgres URI for calcmvpalpha
 # postgres://hruvndtctrrpyk:6ecaaf643d58173ec973e3002c28d138a0c7b7fa2747169599a05d785492cd3a@ec2-34-199-68-114.compute-1.amazonaws.com:5432/da8a58r96bip0j
-    3
+
 class DebugConfig(Config):
     DEBUG = False
 
